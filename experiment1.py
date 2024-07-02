@@ -5,14 +5,14 @@ from collections import deque
 import time
 
 
-env = gym.make('CartPole-v1')
+env = gym.make('Acrobot-v1')
 print('observation space:', env.observation_space)
 print('action space:', env.action_space)
 threshold = env.spec.reward_threshold
 print('threshold: ', threshold)
 
 class Policy():
-    def __init__(self, s_size=4, a_size=2):
+    def __init__(self, s_size=6, a_size=3):
         self.w = 1e-4*np.random.rand(s_size, a_size)  # weights for simple linear policy: state_space x action_space
         
     def forward(self, state):
@@ -35,7 +35,7 @@ def hill_climbing(n_episodes=10000, gamma=0.99, noise_scale=1e-2):
     scores_deque = deque(maxlen=100)
     scores = []
     arr_noise = []
-    best_Gt = -np.Inf
+    best_Gt = -np.inf
     best_w = policy.w
     for i_episode in range(1, n_episodes+1):
         rewards = []
